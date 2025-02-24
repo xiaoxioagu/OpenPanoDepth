@@ -1,0 +1,51 @@
+data_cfg:
+  input_dir: E:\\dataset\\2D3Ds
+  train_file: E:\\python_project\\OpenPanoDepth\\datasets\\stanford2d3d\\train_stanford2d3d.txt
+  test_file: E:\\python_project\\OpenPanoDepth\\datasets\\stanford2d3d\\test_stanford2d3d.txt
+  name: stanford2d3d
+  train_batch_size: 1
+  test_batch_size: 1
+  shuffle: True
+  num_workers: 8
+  type: high
+
+model_cfg:
+  model: Joint_360Depth
+  load_checkpoint: None
+
+  base_config:
+    path: None
+    backbone: vitb16_384
+    non_negative: True
+    enable_attention_hooks: False
+
+worker_cfg:
+  epochs: 20
+  visualize_interval: 20
+  save_checkpoint: E:\\python_project\\OpenPanoDepth\\result\\Joint_360Depth\\checkpoints
+  save_path: E:\\python_project\\OpenPanoDepth\\result\\Joint_360Depth
+
+  optimizer_cfg:
+    solver: AdamW
+    lr: 0.0002
+    betas: (0.9, 0.999)
+    weight_decay: 0.01
+
+  scheduler_cfg:
+    T_0: 5
+    T_mult: 2
+    eta_min: 1e-6
+    last_epoch: -1
+
+
+  evaluator_cfg:
+    metric:
+      - abs_
+      - abs_rel
+      - sq_rel
+      - rms
+      - rms_log
+      - log10
+      - a1
+      - a2
+      - a3

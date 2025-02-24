@@ -1,0 +1,53 @@
+data_cfg:
+  input_dir: E:\dataset\Structured3D\
+  train_file: E:\python_project\OpenPanoDepth\datasets\structure3d\train_structure3d.txt
+  test_file: E:\python_project\OpenPanoDepth\datasets\structure3d\test_structure3d.txt
+  name: stanford2d3d
+  train_batch_size: 1
+  test_batch_size: 1
+  shuffle: True
+  num_workers: 8
+  type: low
+
+model_cfg:
+  model: Unifuse
+  load_checkpoint: None
+
+  base_config:
+    num_layers: 18
+    equi_h: 256
+    equi_w: 512
+    fusion_type: cee
+    imagenet_pretrained: False
+    se_in_fusion: False
+
+worker_cfg:
+  epochs: 20
+  visualize_interval: 20
+  save_checkpoint: E:\\python_project\\OpenPanoDepth\\result\\Unifuse\\checkpoints
+  save_path: E:\\python_project\\OpenPanoDepth\\result\\Unifuse
+
+  optimizer_cfg:
+    solver: AdamW
+    lr: 0.0001
+    betas: (0.9, 0.999)
+    weight_decay: 0.01
+
+  scheduler_cfg:
+    T_0: 5
+    T_mult: 2
+    eta_min: 1e-6
+    last_epoch: -1
+
+
+  evaluator_cfg:
+    metric:
+      - abs_
+      - abs_rel
+      - sq_rel
+      - rms
+      - rms_log
+      - log10
+      - a1
+      - a2
+      - a3

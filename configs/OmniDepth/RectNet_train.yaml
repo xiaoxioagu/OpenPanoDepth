@@ -1,0 +1,54 @@
+data_cfg:
+  input_dir: E:\\dataset\\2D3Ds
+  train_file: E:\\python_project\\OpenPanoDepth\\datasets\\stanford2d3d\\train_stanford2d3d.txt
+  test_file: E:\\python_project\\OpenPanoDepth\\datasets\\stanford2d3d\\test_stanford2d3d.txt
+  name: stanford2d3d
+  train_batch_size: 2
+  test_batch_size: 2
+  shuffle: True
+  num_workers: 8
+  type: high
+
+model_cfg:
+  model: RectNet
+#  load_checkpoint: E:\python_project\OpenPanoDepth\result\Omnifusion_try\checkpoints\checkpoint_latest.pth
+  load_checkpoint: None
+
+  base_config:
+    input: None
+
+
+loss_cfg:
+  # This model uses the user-defined loss function.
+
+
+worker_cfg:
+  epochs: 10
+  visualize_interval: 20
+  save_checkpoint: E:\\python_project\\OpenPanoDepth\\result\\OmniDepth_RectNet\\checkpoints
+  save_path: E:\\python_project\\OpenPanoDepth\\result\\OmniDepth_RectNet
+
+  optimizer_cfg:
+    solver: AdamW
+    lr: 0.0002
+    betas: (0.9, 0.999)
+    weight_decay: 0.01
+
+  scheduler_cfg:
+    T_0: 5
+    T_mult: 2
+    eta_min: 1e-6
+    last_epoch: -1
+
+
+  evaluator_cfg:
+    metric:
+      - abs_
+      - abs_rel
+      - sq_rel
+      - rms
+      - rms_log
+      - log10
+      - a1
+      - a2
+      - a3

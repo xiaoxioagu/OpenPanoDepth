@@ -1,0 +1,31 @@
+data_cfg:
+  input_dir: E:\\dataset\\2D3Ds
+  test_file: E:\\python_project\\OpenPanoDepth\\datasets\\stanford2d3d\\test_stanford2d3d.txt
+  name: stanford2d3d
+  test_batch_size: 1
+  shuffle: True
+  num_workers: 8
+  type: high
+
+model_cfg:
+  model: Bifuse
+  load_checkpoint: E:\python_project\OpenPanoDepth\openpano\modeling\Bifuse\per_models\BiFuse_Pretrained.pkl
+
+  base_config:
+    layers: 50
+    decoder: "upproj"
+
+worker_cfg:
+  save_path: E:\\python_project\\OpenPanoDepth\\result\\Bifuse
+
+  evaluator_cfg:
+    metric:
+      - abs_
+      - abs_rel
+      - sq_rel
+      - rms
+      - rms_log
+      - log10
+      - a1
+      - a2
+      - a3

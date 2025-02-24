@@ -1,0 +1,34 @@
+data_cfg:
+  input_dir: E:\dataset\Structured3D\
+  test_file: E:\python_project\OpenPanoDepth\datasets\structure3d\test_structure3d.txt
+  name: stanford2d3d
+  test_batch_size: 1
+  shuffle: False
+  num_workers: 8
+  type: low
+
+model_cfg:
+  model: Omnifusion
+  load_checkpoint: E:\python_project\OpenPanoDepth\result\Omnifusion_iter2\checkpoints\checkpoint_best.pth
+
+  base_config:
+    patch_size: (128,128)
+    fov: 80
+    nrows: 4
+    iter: 2
+    npatches_dict: { 3: 10, 4: 18, 5: 26, 6: 46 }
+
+
+worker_cfg:
+  save_path: E:\\python_project\\OpenPanoDepth\\result\\Omnifusion_iter2
+  evaluator_cfg:
+    metric:
+      - abs_
+      - abs_rel
+      - sq_rel
+      - rms
+      - rms_log
+      - log10
+      - a1
+      - a2
+      - a3

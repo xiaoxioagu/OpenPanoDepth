@@ -1,0 +1,37 @@
+data_cfg:
+  input_dir: E:\\dataset\\2D3Ds
+  test_file: E:\\python_project\\OpenPanoDepth\\datasets\\stanford2d3d\\test_stanford2d3d.txt
+  name: stanford2d3d
+  test_batch_size: 2
+  shuffle: True
+  num_workers: 8
+  type: high
+
+model_cfg:
+  model: Bifusev2_super
+#  load_checkpoint: E:\python_project\OpenPanoDepth\result\Omnifusion_try\checkpoints\checkpoint_latest.pth
+  load_checkpoint: E:\python_project\OpenPanoDepth\result\Bifusev2_super\checkpoints\checkpoint_best.pth
+
+  base_config:
+     save_path: E:\\python_project\\OpenPanoDepth\\result\\Bifusev2_super
+     dnet_args:
+          layers: 34
+          CE_equi_h: [ 8, 16, 32, 64, 128, 256, 512 ]
+     pnet_args:
+          layers: 18
+          nb_tgts: 2
+
+
+worker_cfg:
+  save_path: E:\\python_project\\OpenPanoDepth\\result\\Bifusev2_super
+  evaluator_cfg:
+    metric:
+      - abs_
+      - abs_rel
+      - sq_rel
+      - rms
+      - rms_log
+      - log10
+      - a1
+      - a2
+      - a3

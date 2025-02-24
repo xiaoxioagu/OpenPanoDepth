@@ -1,0 +1,35 @@
+data_cfg:
+  input_dir: E:\\dataset\\2D3Ds
+  test_file: E:\\python_project\\OpenPanoDepth\\datasets\\stanford2d3d\\test_stanford2d3d.txt
+  name: stanford2d3d
+  test_batch_size: 1
+  shuffle: True
+  num_workers: 8
+  type: high
+
+model_cfg:
+  model: Unifuse
+  load_checkpoint: E:\\python_project\\OpenPanoDepth\\result\\Unifuse\\checkpoints\\checkpoint_latest.pth
+
+  base_config:
+    num_layers: 18
+    equi_h: 512
+    equi_w: 1024
+    fusion_type: cee
+    imagenet_pretrained: False
+    se_in_fusion: False
+
+worker_cfg:
+  save_path: E:\\python_project\\OpenPanoDepth\\result\\Unifuse
+
+  evaluator_cfg:
+    metric:
+      - abs_
+      - abs_rel
+      - sq_rel
+      - rms
+      - rms_log
+      - log10
+      - a1
+      - a2
+      - a3

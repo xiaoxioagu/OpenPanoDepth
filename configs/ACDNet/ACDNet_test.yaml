@@ -1,0 +1,32 @@
+data_cfg:
+  input_dir: E:\dataset\Structured3D\
+  train_file: E:\python_project\OpenPanoDepth\datasets\structure3d\train_structure3d.txt
+  test_file: E:\python_project\OpenPanoDepth\datasets\structure3d\test_structure3d.txt
+  name: stanford2d3d
+  train_batch_size: 2
+  test_batch_size: 2
+  shuffle: True
+  num_workers: 8
+  type: low
+
+model_cfg:
+  model: ACDNet
+  load_checkpoint: E:\python_project\OpenPanoDepth\result\ACDNet\checkpoints\checkpoint_best.pth
+
+  base_config:
+    in_channels: 3
+    mode: test
+
+worker_cfg:
+  save_path: E:\\python_project\\OpenPanoDepth\\result\\ACDNet
+  evaluator_cfg:
+    metric:
+      - abs_
+      - abs_rel
+      - sq_rel
+      - rms
+      - rms_log
+      - log10
+      - a1
+      - a2
+      - a3

@@ -1,0 +1,55 @@
+data_cfg:
+  input_dir: E:\\dataset\\2D3Ds
+  test_file: E:\\python_project\\OpenPanoDepth\\datasets\\stanford2d3d\\test_stanford2d3d.txt
+  name: stanford2d3d
+  test_batch_size: 2
+  shuffle: True
+  num_workers: 8
+  type: high
+
+model_cfg:
+  model: HoHonet
+  load_checkpoint: E:\\python_project\\OpenPanoDepth\\openpano\\modeling\\HoHonet\\per_models\\mp3d_depth_HOHO_depth_dct_efficienthc_TransEn1_hardnet\\ep60.pth
+
+  base_config:
+    emb_dim: 256
+
+    backbone_config:
+        module: HarDNet
+        kwargs:
+          depth_wise: False
+          arch: 68
+          pretrained: True
+
+    decode_config:
+        module: EfficientHeightReduction
+
+    refine_config:
+        module: TransEn
+        kwargs:
+          position_encode: 256
+          num_layers: 1
+
+    upsample_config:
+        module: Upsample1D
+
+    modalities_config:
+        DepthEstimator:
+          basis: dct
+          n_components: 64
+          loss: l1
+
+
+worker_cfg:
+  save_path: E:\\python_project\\OpenPanoDepth\\result\\HoHonet
+  evaluator_cfg:
+    metric:
+      - abs_
+      - abs_rel
+      - sq_rel
+      - rms
+      - rms_log
+      - log10
+      - a1
+      - a2
+      - a3
